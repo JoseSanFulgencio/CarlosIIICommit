@@ -13,11 +13,11 @@
  * @package           CarlosIIICommit
  *
  * @wordpress-plugin
- * Plugin Name:       WordPress Plugin Boilerplate
+ * Plugin Name:       JuezLTICommit
  * Plugin URI:        http://example.com/CarlosIIICommit-uri/
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Description:       Gestión de los avances que se vayan produciendo en el desarrollo.
  * Version:           1.0.0
- * Author:            Your Name or Your Company
+ * Author:            CarlosIII_JuezLTI
  * Author URI:        http://example.com/
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt

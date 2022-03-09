@@ -25,7 +25,7 @@
  * @since      1.0.0
  * @package    CarlosIIICommit
  * @subpackage CarlosIIICommit/includes
- * @author     Your Name <email@example.com>
+ * @author     Jose <8686470@alu.murciaeduca.es>
  */
 class CarlosIIICommit {
 
@@ -78,6 +78,7 @@ class CarlosIIICommit {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_commit_types();
 
 	}
 
@@ -110,6 +111,11 @@ class CarlosIIICommit {
 		 * of the plugin.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-CarlosIIICommit-i18n.php';
+
+		/**
+		 * The class responsible for defining new commit type
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-CarlosIIICommit-commit-type.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -174,6 +180,19 @@ class CarlosIIICommit {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
+
+	
+	/**
+     * Register Commit Type.
+     *
+     * @since    1.0.0
+     * @access   private
+     */
+    private function define_commit_types() {
+        // Register custom post types
+        $Commit_Type = new CarlosIIICommit_commit_type();
+    }
+
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
