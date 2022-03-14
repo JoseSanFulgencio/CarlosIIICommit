@@ -100,4 +100,51 @@ class CarlosIIICommit_Admin {
 
 	}
 
+	public function CarlosIIICommit_suscribe() {
+		$suscriptores = get_option('CarlosIIICommit_suscriptores');
+
+		if(!in_array(htmlspecialchars($_POST["nombre"]), $suscriptores)) {
+
+			$suscriptores[] = htmlspecialchars($_POST["nombre"]);
+			update_option('CarlosIIICommit_suscriptores', $suscriptores);
+			$nombreSuscriptor = htmlspecialchars($_POST["nombre"]);
+			$emailSuscriptor = htmlspecialchars($_POST["email"]);
+			$logoUrlSuscriptor = htmlspecialchars($_POST["url_logo"]);
+
+			if(!$this->getSuscriptor($nombreSuscriptor)) {
+				$this->addSuscriptor($nombreSuscriptor, $emailSuscriptor, $logoUrlSuscriptor);
+			}
+		}
+
+		wp_safe_redirect(site_url() );
+	}
+
+	public function getSuscriptor($emailSuscriptor) {
+		global $wpdb;
+ 
+			$table_name = $wpdb->prefix . "c3CSuscriptores";
+				// convendría no duplicar este código
+				// Una buena forma sería crear una constante en la clase CarlosIIICommit con:
+				// const C3JSUSCRIPTORES_TABLE = 'c3CSuscriptores';
+				// y acceder a ella desde este código
+				// $table_name = $wpdb->prefix . CarlosIIICommit::C3CSUSCRIPTORES_TABLE;
+			$query = "SELECT count(email) FROM $table_name WHERE email = %s";
+			$existeSuscriptor = $wpdb->get_var( $wpdb->prepare($query, $emailSuscriptor)); 
+			return $existeSuscriptor > 0;
+	 }
+
+	 public function addSuscriptor($emailSuscriptor) {
+		global $wpdb;
+ 
+			$table_name = $wpdb->prefix . "c3CSuscriptores";
+			$wpdb->insert(
+				$table_name,
+				array(
+						'email' => $emailSuscriptor,
+						'time' => current_time('mysql', 2),
+				),
+				array('%s')
+			);
+	 }
+
 }

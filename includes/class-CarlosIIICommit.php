@@ -122,11 +122,26 @@ class CarlosIIICommit {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-CarlosIIICommit-admin.php';
 
+        /**
+         * The class responsible for defining shortcode.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-CarlosIIICommit-shortcode.php';
+
+		/**
+         * La clase responsable de la definición del widget de subscripción.
+         */
+        require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-CarlosIIICommitWidgetSuscribeInstitutions.php';
+
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-CarlosIIICommit-public.php';
+
+		/**
+		* La clase responsable de gestionar las opciones.
+		*/
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-CarlosIIICommit-options.php';
 
 		$this->loader = new CarlosIIICommit_Loader();
 
@@ -162,6 +177,13 @@ class CarlosIIICommit {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+        $plugin_shortcode = new CarlosIIICommit_shortcode();
+        $this->loader->add_action( 'init', $plugin_shortcode, 'CarlosIIICommit_shortcode_init' );
+		$this->loader->add_action( 'admin_menu', $plugin_options, 'CarlosIIICommit_options_menu' );
+		$this->loader->add_action( 'admin_init', $plugin_options, 'CarlosIIICommitRegistraOpciones');
+
+       // Creando una entrada nueva en el menú Commit
+        $plugin_options = new CarlosIIICommit_Options();
 
 	}
 

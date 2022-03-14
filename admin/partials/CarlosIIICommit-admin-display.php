@@ -11,6 +11,20 @@
  * @package    CarlosIIICommit
  * @subpackage CarlosIIICommit/admin/partials
  */
-?>
 
-<!-- This file should primarily consist of HTML with a little bit of PHP. -->
+// Widget Backend
+function CarlosIIICommitWidgetAdminForm( $instance, $widget ) {
+if ( isset( $instance[ 'title' ] ) ) {
+$title = $instance[ 'title' ];
+}
+else {
+$title = __( 'Suscríbete', 'CarlosIIICommitSuscribe_widget_domain' );
+}
+// Widget admin form
+?>
+<p>
+    <label for="<?php echo $widget->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
+    <input class="widefat" id="<?php echo $widget->get_field_id( 'title' ); ?>" name="<?php echo $widget->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+</p>
+<?php
+}
